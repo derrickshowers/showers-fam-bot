@@ -1,12 +1,16 @@
-var request = require('request');
+'use strict';
 
-export default function sendMessage(sender, text) {
+let request = require('request');
+
+const messageUrl = 'https://graph.facebook.com/v2.6/me/messages';
+
+module.exports = function sendMessage(sender, text) {
   let messageData = {
     text: text
   };
 
   request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
+    url: messageUrl,
     qs: { access_token: process.env.TOKEN },
     method: 'POST',
     json: {
@@ -20,4 +24,4 @@ export default function sendMessage(sender, text) {
       console.log(`Error: ${response.body.error}`);
     }
   });
-}
+};
