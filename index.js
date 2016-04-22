@@ -1,6 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var request = require('request');
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
@@ -11,6 +10,19 @@ app.use(bodyParser.json());
 // ROUTE - INDEX
 app.get('/', (req, res) => {
   res.send('Hello world, I am a chat bot');
+});
+
+// ROUTE - RECEIVE MESSAGE
+app.post('/webhook/', (req, res) => {
+  messaging_events = req.body.entry[0].messaging;
+  messaging_events.forEach(event => {
+    let sender = event.sender.id;
+    if (event.message && event.message.text) {
+      let text = event.message.text;
+      sendMessage(sender, `Text received, echo: ${text.substring(0, 200)}`);
+    }
+    res.sendStatus(200);
+  });
 });
 
 // ROUTE - VERIFICATION
