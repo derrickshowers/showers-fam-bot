@@ -1,7 +1,7 @@
 {
-  "name": "in-bot",
+  "name": "showers-fam-bot",
   "version": "0.0.1",
-  "description": "LinkedIn bot for messenger",
+  "description": "Say hello to the Showers Fam, bot style",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
